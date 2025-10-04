@@ -5,11 +5,13 @@ import static android.content.Context.TELEPHONY_SUBSCRIPTION_SERVICE;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.preference.PreferenceManager;
 import android.provider.CallLog.Calls;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.SubscriptionInfo;
@@ -84,7 +86,7 @@ public class LogEntryAdapter extends CursorAdapter implements View.OnClickListen
 	private Drawable defaultContactDrawable;
 	private SoftReference<Context> contextRef;
 	private boolean isRtlLayout, isSingleNumberLog, loadContactImages;
-	private List<SubscriptionInfo> subscriptionInfoList;
+	private List<SubscriptionInfo> subscriptionInfoList = null;
 	private Map<String, BitmapDrawable> subIdToIconMap;
 
 	@SuppressLint("MissingPermission")
@@ -98,7 +100,9 @@ public class LogEntryAdapter extends CursorAdapter implements View.OnClickListen
 		contextRef = new SoftReference<Context>(context);
 		subIdToIconMap = new HashMap<>();
 
-		if (Build.VERSION.SDK_INT >= 22) {
+		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+
+		if (Build.VERSION.SDK_INT >= 22 && preferences.getBoolean("show_sim_labels", true)) {
 			SubscriptionManager subscriptionManager = (SubscriptionManager) context.getSystemService(TELEPHONY_SUBSCRIPTION_SERVICE);
 			subscriptionInfoList = subscriptionManager.getActiveSubscriptionInfoList();
 			if (subscriptionInfoList != null) {
@@ -171,7 +175,7 @@ public class LogEntryAdapter extends CursorAdapter implements View.OnClickListen
 	}
 
 	private void setSimCardImage(Cursor cursor, LogEntryCache viewCache) {
-		if (Build.VERSION.SDK_INT >= 22) {
+		if (Build.VERSION.SDK_INT >= 22 && null != subscriptionInfoList) {
 			String phoneAccountId = cursor.getString(COLUMN_PHONE_ACCOUNT_ID);
 			for (String subId: subIdToIconMap.keySet()) {
 				if (phoneAccountId.startsWith(subId)) {
@@ -179,6 +183,8 @@ public class LogEntryAdapter extends CursorAdapter implements View.OnClickListen
 					break;
 				}
 			}
+		} else {
+			viewCache.callSimCard.setVisibility(View.GONE);
 		}
 	}
 

@@ -17,4 +17,8 @@
 		android:title="@string/preference_contact_sources"
 		android:shouldDisableView="true"
 		/>
+	<CheckBoxPreference
+		android:key="show_sim_labels"
+		android:title="@string/show_sim_labels"
+		android:defaultValue="true" />
 </PreferenceScreen>

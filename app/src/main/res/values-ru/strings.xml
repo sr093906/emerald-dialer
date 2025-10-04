@@ -54,6 +54,8 @@
 	<string name="preference_t9_locale">Язык T9</string>
 	<string name="preference_contact_sources">Источники контактов</string>
 
+	<string name="show_sim_labels">Показывать ярлыки SIM</string>
+
 	<!-- CALL TYPES -->
 	<string name="call_type_incoming">Входящий вызов</string>
 	<string name="call_type_missed">Пропущенный вызов</string>
