@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string name="privacy_policy_title">Политика конфиденциальности</string>
-	<string name="accept">Принять</string>
+    <string name="privacy_policy">Emerald Dialer использует предоставленные пользователем данные (контакты и данные журнала вызовов) только для предоставления функций, необходимых для правильного функционирования приложения. Emerald Dialer не передает ваши данные и результаты их обработки разработчику (разработчикам) приложения и другим третьим лицам.</string>
+    <string name="accept">Принять</string>
 </resources>

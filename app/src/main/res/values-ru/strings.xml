@@ -51,7 +51,8 @@
 	<string name="theme_entry_light">Светлая</string>
 	<string name="theme_entry_dark">Тёмная</string>
     <string name="theme_entry_night">Ночная</string>
-    <string name="preference_contact_sources">Источники контактов</string>
+	<string name="preference_t9_locale">Язык T9</string>
+	<string name="preference_contact_sources">Источники контактов</string>
 
 	<!-- CALL TYPES -->
 	<string name="call_type_incoming">Входящий вызов</string>
@@ -66,5 +67,15 @@
 	<string name="dialog_clean_log_to">По:</string>
 	<string name="dialog_clean_log_date">Дата:</string>
 	<string name="dialog_clean_log_pick_date">Выберите дату</string>
+
+	<!-- FIRST LAUNCH SCREEN -->
+    <string name="permission_request">Чтобы использовать все функции приложения, пожалуйста, предоставьте следующие разрешения</string>
+	<string name="permission_title_required">Обязательные</string>
+	<string name="permission_make_calls">Совершать звонки</string>
+	<string name="permission_title_optional">Дополнительные</string>
+	<string name="permission_call_log">Доступ к журналу звонков для просмотра журнала и удаления его элементов</string>
+	<string name="permission_contacts">Доступ к контактам: используется для поиска контактов. При некоторых условиях журнал звонков может отображать имена контактов даже без предоставления этого разрешения.</string>
+	<string name="btn_provide_permissions">Предоставить разрешения</string>
+	<string name="btn_finish_init">Продолжить</string>
 
 </resources>
