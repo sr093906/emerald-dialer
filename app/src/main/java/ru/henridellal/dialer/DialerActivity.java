@@ -151,6 +151,7 @@ public class DialerActivity extends Activity implements View.OnClickListener, Vi
 
 		LoaderManager loaderManager = getLoaderManager();
 		if (PermissionManager.isPermissionGranted(this, Manifest.permission.READ_CONTACTS)) {
+			DialerApp.setNumberTypeLabels(getResources());
 			mAsyncContactImageLoader = new AsyncContactImageLoader(this);
 			contactsEntryAdapter = new ContactsEntryAdapter(this, mAsyncContactImageLoader);
 			if (T9Manager.getInstance().getLanguage().startsWith("zh")) {

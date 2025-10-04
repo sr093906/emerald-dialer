@@ -50,6 +50,9 @@
 
 	<string name="regex_star" translatable="false">\\Q*\\E</string>
 	<string name="regex_hash" translatable="false">\\Q#\\E</string>
+
+	<!-- CONTACTS -->
+	<string name="number_type_primary">Primary</string>
 	
 	<!-- CALL INFORMATION -->
 	<string name="date">Date</string>

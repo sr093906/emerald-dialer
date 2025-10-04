@@ -19,6 +19,9 @@
 	<string name="local_regex_8">[ШЩЪЫшщъы]</string>
 	<string name="local_regex_9">[ЬЭЮЯьэюя]</string>
 
+	<!-- CONTACTS -->
+	<string name="number_type_primary">Осн.</string>
+
 	<!-- CALL INFORMATION -->
 	<string name="date">Время звонка</string>
 	<string name="duration">Длительность</string>

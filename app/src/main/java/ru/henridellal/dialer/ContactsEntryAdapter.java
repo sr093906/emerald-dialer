@@ -26,13 +26,15 @@ public class ContactsEntryAdapter extends BaseAdapter implements Filterable, Vie
 		Phone.LOOKUP_KEY,
 		Phone.DISPLAY_NAME,
 		Phone.NUMBER,
-		Phone.TYPE
+		Phone.TYPE,
+		Phone.IS_PRIMARY
 	};
 	
 	public static final int COLUMN_LOOKUP_KEY = 1;
 	public static final int COLUMN_NAME = 2;
 	public static final int COLUMN_NUMBER = 3;
 	public static final int COLUMN_TYPE = 4;
+	public static final int COLUMN_PRIMARY = 5;
 
 	public static final int FILTERING_MODE_REGEX = 0;
 	public static final int FILTERING_MODE_RAW = 1;
@@ -125,7 +127,11 @@ public class ContactsEntryAdapter extends BaseAdapter implements Filterable, Vie
 		}
 		viewCache.phoneNumber.setText(formattedNumber);
 
-		String typeLabel = ContactsUtil.getTypeLabel(contextRef.get(), queryResult.type);
+		String typeLabel = ContactsUtil.getTypeLabel(
+				queryResult.type,
+				queryResult.isPrimary
+		);
+
 		viewCache.numberType.setText(typeLabel);
 
 		ContactImageTag tag = new ContactImageTag(String.valueOf(queryResult.id), queryResult.lookupKey);

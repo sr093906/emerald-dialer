@@ -8,6 +8,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.ContactsContract;
 
+import ru.henridellal.dialer.DialerApp;
 import ru.henridellal.dialer.PermissionManager;
 import ru.henridellal.dialer.dialog.MissingContactsAppDialog;
 
@@ -56,8 +57,16 @@ public class ContactsUtil {
 		return contactName;
 	}
 
-	public static String getTypeLabel(Context c, int type) {
-		if (c == null) return "";
-		return (String) ContactsContract.CommonDataKinds.Phone.getTypeLabel(c.getResources(), type, null);
+	public static String getTypeLabel(int type, boolean primaryContact) {
+		String typeLabel = DialerApp.numberTypeLabels.get(type);
+		if (!primaryContact) {
+			return typeLabel;
+		} else {
+			return String.format(
+					"%s (%s)",
+					typeLabel,
+					DialerApp.primaryNumberTypeLabel
+			);
+		}
 	}
 }
