@@ -23,19 +23,22 @@ public class PermissionManager {
 	}
 
 	public static boolean isPermissionGranted(Context context, String permission) {
-		if (Build.VERSION.SDK_INT < 23) {
-			return true;
-		}
-		return isPermissionGrantedRaw(context, permission);
+		return Build.VERSION.SDK_INT < 23
+				|| isPermissionGrantedRaw(context, permission);
 	}
 
 	@TargetApi(M)
-	public static boolean hasRequiredPermissions(Context context) {
+	public static boolean hasAllPermissions(Context context) {
 		for (int i = 0; i < PERMISSIONS.length; i++) {
 			if (!isPermissionGrantedRaw(context, PERMISSIONS[i])) {
 				return false;
 			}
 		}
 		return true;
+	}
+
+	@TargetApi(M)
+	public static boolean hasRequiredPermissions(Context context) {
+		return isPermissionGrantedRaw(context, PERMISSIONS[0]);
 	}
 }

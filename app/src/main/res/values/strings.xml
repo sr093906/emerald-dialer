@@ -104,4 +104,14 @@
     <string name="dialog_clean_log_date">Date:</string>
     <string name="dialog_clean_log_pick_date">Pick date</string>
 
+	<!-- FIRST LAUNCH SCREEN -->
+    <string name="permission_request">To use all features of the application, please provide following permissions</string>
+	<string name="permission_title_required">Required</string>
+	<string name="permission_make_calls">Make calls</string>
+	<string name="permission_title_optional">Optional</string>
+	<string name="permission_call_log">Access to call log: view call log and remove entries</string>
+	<string name="permission_contacts">Access to contacts: used for contacts search. Under some circimstances, call log may display contact names even if the permission is not provided.</string>
+	<string name="btn_provide_permissions">Provide permissions</string>
+    <string name="btn_finish_init">Continue</string>
+
 </resources>

@@ -9,10 +9,10 @@ import ru.henridellal.dialer.R;
 public class ThemingUtil {
 
 	public static Drawable getDefaultContactDrawable(Context context) {
-		return getDefaultContactDrawable(context, R.attr.drawableContactImage);
+		return getThemedDrawable(context, R.attr.drawableContactImage);
 	}
 
-	public static Drawable getDefaultContactDrawable(Context context, int attrId) {
+	public static Drawable getThemedDrawable(Context context, int attrId) {
 		TypedValue outValue = new TypedValue();
 		context.getTheme().resolveAttribute(attrId, outValue, true);
 		return context.getResources().getDrawable(outValue.resourceId, context.getTheme());

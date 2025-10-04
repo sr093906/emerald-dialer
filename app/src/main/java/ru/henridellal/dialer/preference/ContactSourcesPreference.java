@@ -25,7 +25,6 @@ public class ContactSourcesPreference extends MultiSelectListPreference {
 		super(context, attrs);
 		if (PermissionManager.isPermissionGranted(context, Manifest.permission.READ_CONTACTS)) {
 			CharSequence[] sources = getContactSources(context);
-			cleanCurrentValues(sources);
 			setEntries(sources);
 			setEntryValues(sources);
 		}
@@ -35,22 +34,6 @@ public class ContactSourcesPreference extends MultiSelectListPreference {
 	public boolean isEnabled() {
 		return (PermissionManager.isPermissionGranted(getContext(), Manifest.permission.READ_CONTACTS))
 				&& getEntries().length > 1;
-	}
-
-	public void cleanCurrentValues(CharSequence[] sources) {
-		Set<String> values = new HashSet<String>();
-		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getContext());
-		values.addAll(sp.getStringSet(getKey(), new HashSet<String>()));
-		List<CharSequence> s = Arrays.asList(sources);
-		List<String> toBeRemoved = new ArrayList<String>();
-		for (String v: values) {
-			Log.e(DialerApp.LOG_TAG, v);
-			if (!s.contains(v)) {
-				toBeRemoved.add(v);
-			}
-		}
-		values.removeAll(toBeRemoved);
-		sp.edit().putStringSet(getKey(), values).commit();
 	}
 
 	public static CharSequence[] getContactSources(Context context) {
@@ -73,5 +56,20 @@ public class ContactSourcesPreference extends MultiSelectListPreference {
 		CharSequence[] result = new CharSequence[sources.size()];
 		sources.toArray(result);
 		return result;
+	}
+
+	public static void initDefaults(Context context, SharedPreferences preferences) {
+		if (null == preferences.getStringSet("contact_sources", null)) {
+			CharSequence[] sources = getContactSources(context);
+			HashSet<String> defaultSources = new HashSet<>();
+			for (CharSequence cs: sources) {
+				String source = (String) cs;
+				if (source.startsWith("com.android.contacts")
+						|| source.startsWith("vnd.sec.contacts")) {
+					defaultSources.add(source);
+				}
+			}
+			preferences.edit().putStringSet("contact_sources", defaultSources).commit();
+		}
 	}
 }

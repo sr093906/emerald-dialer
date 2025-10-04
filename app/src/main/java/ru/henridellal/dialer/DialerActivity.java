@@ -106,10 +106,16 @@ public class DialerActivity extends Activity implements View.OnClickListener, Vi
 		DialerApp.setTheme(this);
 		setContentView(R.layout.main);
 		preferences = PreferenceManager.getDefaultSharedPreferences(this);
-		if (!preferences.getBoolean("privacy_policy", false)) {
-			PrivacyPolicyDialog.show(this, preferences.edit());
+		if (!preferences.getBoolean("privacy_policy", false)
+				|| (Build.VERSION.SDK_INT > 23
+					&& !PermissionManager.hasRequiredPermissions(this)
+					)
+		) {
+			Intent intent = new Intent(this, FirstLaunchActivity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(intent);
+			finish();
 		}
-		checkPermissions();
 		numberField = (EditText)findViewById(R.id.number_field);
 		numberField.setShowSoftInputOnFocus(false);
 		numberField.setOnLongClickListener(this);
@@ -174,12 +180,6 @@ public class DialerActivity extends Activity implements View.OnClickListener, Vi
 		super.onResume();
 		boolean isPortrait = getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
 		list.setOnScrollListener(isPortrait ? onCallLogScrollListener : null);
-	}
-
-	private void checkPermissions() {
-		if (Build.VERSION.SDK_INT >= 23 && !PermissionManager.hasRequiredPermissions(this)) {
-			requestPermissions(PermissionManager.PERMISSIONS, 0);
-		}
 	}
 
 	private Context getT9LocaleContext(String t9LocalePref) {

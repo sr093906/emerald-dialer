@@ -49,7 +49,7 @@ class AsyncContactImageLoader {
 	}
 	public AsyncContactImageLoader(Context context, int attrId) {
 		mContext = context;
-		mDefaultDrawable = ThemingUtil.getDefaultContactDrawable(context, attrId);
+		mDefaultDrawable = ThemingUtil.getThemedDrawable(context, attrId);
 		mImageCache = new HashMap<String, SoftReference<Drawable>>(IMAGECACHE_INITIAL_CAPACITY);
 		mHandler = new Handler();
 		mBackgroundImageLoader = new BackgroundImageLoader();

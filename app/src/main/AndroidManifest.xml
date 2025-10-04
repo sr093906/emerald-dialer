@@ -77,6 +77,9 @@
             </intent-filter>
             
         </activity>
+
+        <activity android:name=".FirstLaunchActivity" />
+
         <activity android:name=".PhoneNumberActivity" />
         <activity
         	android:name=".SpeedDialActivity">

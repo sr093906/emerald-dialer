@@ -46,10 +46,11 @@ public class PhoneNumberActivity extends Activity implements LoaderManager.Loade
 		findViewById(R.id.btn_cleanup).setOnClickListener(this);
 		findViewById(R.id.contact_image).setOnClickListener(this);
 		String contactName = ContactsUtil.getContactName(this, number);
+		String formattedNumber = NumberFormatter.format(number);
 		if (null != contactName) {
-			((TextView)findViewById(R.id.secondary_text)).setText(number);
+			((TextView)findViewById(R.id.secondary_text)).setText(formattedNumber);
 		} else {
-			contactName = number;
+			contactName = formattedNumber;
 		}
 		((TextView)findViewById(R.id.main_text)).setText(contactName);
 		loadContactImage();
@@ -60,7 +61,7 @@ public class PhoneNumberActivity extends Activity implements LoaderManager.Loade
 			mAsyncContactImageLoader = new AsyncContactImageLoader(this, R.attr.drawableContactImageForTitle);
 		} else {
 			((ImageView) findViewById(R.id.contact_image)).setImageDrawable(
-					ThemingUtil.getDefaultContactDrawable(this, R.attr.drawableContactImageForTitle)
+					ThemingUtil.getThemedDrawable(this, R.attr.drawableContactImageForTitle)
 			);
 			return;
 		}
