@@ -1,5 +1,6 @@
 package ru.henridellal.dialer;
 
+import static ru.henridellal.dialer.ContactsEntryAdapter.COLUMN_LABEL;
 import static ru.henridellal.dialer.ContactsEntryAdapter.COLUMN_LOOKUP_KEY;
 import static ru.henridellal.dialer.ContactsEntryAdapter.COLUMN_NAME;
 import static ru.henridellal.dialer.ContactsEntryAdapter.COLUMN_NUMBER;
@@ -23,6 +24,7 @@ public class QueryResult implements Comparable<QueryResult> {
 	public final String lookupKey;
 	public final String name;
 	public final String number;
+	public final String label;
 	public final int type;
 	public int numberStart;
 	public int numberEnd;
@@ -38,6 +40,7 @@ public class QueryResult implements Comparable<QueryResult> {
 		this.number = getNumber(cursor);
 		this.type = getType(cursor);
 		this.isPrimary = getIsPrimary(cursor);
+		this.label = getLabel(cursor);
 	}
 	
 	public void setNumberPlace(int numberStart, int numberEnd) {
@@ -56,6 +59,10 @@ public class QueryResult implements Comparable<QueryResult> {
 
 	private int getId(Cursor cursor) {
 		return cursor.getInt(0);
+	}
+
+	private String getLabel(Cursor cursor) {
+		return cursor.getString(COLUMN_LABEL);
 	}
 
 	private String getLookupKey(Cursor cursor) {

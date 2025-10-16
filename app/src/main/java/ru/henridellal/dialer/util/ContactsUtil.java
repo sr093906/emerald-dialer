@@ -10,6 +10,7 @@ import android.provider.ContactsContract;
 
 import ru.henridellal.dialer.DialerApp;
 import ru.henridellal.dialer.PermissionManager;
+import ru.henridellal.dialer.QueryResult;
 import ru.henridellal.dialer.dialog.MissingContactsAppDialog;
 
 public class ContactsUtil {
@@ -57,9 +58,12 @@ public class ContactsUtil {
 		return contactName;
 	}
 
-	public static String getTypeLabel(int type, boolean primaryContact) {
-		String typeLabel = DialerApp.numberTypeLabels.get(type);
-		if (!primaryContact) {
+	public static String getTypeLabel(QueryResult queryResult) {
+		if (queryResult.type == ContactsContract.CommonDataKinds.Phone.TYPE_CUSTOM) {
+			return queryResult.label;
+		}
+		String typeLabel = DialerApp.numberTypeLabels.get(queryResult.type);
+		if (!queryResult.isPrimary) {
 			return typeLabel;
 		} else {
 			return String.format(

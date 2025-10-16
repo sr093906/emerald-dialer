@@ -27,7 +27,8 @@ public class ContactsEntryAdapter extends BaseAdapter implements Filterable, Vie
 		Phone.DISPLAY_NAME,
 		Phone.NUMBER,
 		Phone.TYPE,
-		Phone.IS_PRIMARY
+		Phone.IS_PRIMARY,
+		Phone.LABEL
 	};
 	
 	public static final int COLUMN_LOOKUP_KEY = 1;
@@ -35,6 +36,7 @@ public class ContactsEntryAdapter extends BaseAdapter implements Filterable, Vie
 	public static final int COLUMN_NUMBER = 3;
 	public static final int COLUMN_TYPE = 4;
 	public static final int COLUMN_PRIMARY = 5;
+	public static final int COLUMN_LABEL = 6;
 
 	public static final int FILTERING_MODE_REGEX = 0;
 	public static final int FILTERING_MODE_RAW = 1;
@@ -127,10 +129,7 @@ public class ContactsEntryAdapter extends BaseAdapter implements Filterable, Vie
 		}
 		viewCache.phoneNumber.setText(formattedNumber);
 
-		String typeLabel = ContactsUtil.getTypeLabel(
-				queryResult.type,
-				queryResult.isPrimary
-		);
+		String typeLabel = ContactsUtil.getTypeLabel(queryResult);
 
 		viewCache.numberType.setText(typeLabel);
 
