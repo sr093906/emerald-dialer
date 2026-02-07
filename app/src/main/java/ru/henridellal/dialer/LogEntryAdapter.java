@@ -177,6 +177,10 @@ public class LogEntryAdapter extends CursorAdapter implements View.OnClickListen
 	private void setSimCardImage(Cursor cursor, LogEntryCache viewCache) {
 		if (Build.VERSION.SDK_INT >= 22 && null != subscriptionInfoList) {
 			String phoneAccountId = cursor.getString(COLUMN_PHONE_ACCOUNT_ID);
+			if (null == phoneAccountId) {
+				viewCache.callSimCard.setVisibility(View.GONE);
+				return;
+			}
 			for (String subId: subIdToIconMap.keySet()) {
 				if (phoneAccountId.startsWith(subId)) {
 					viewCache.callSimCard.setImageDrawable(subIdToIconMap.get(subId));
