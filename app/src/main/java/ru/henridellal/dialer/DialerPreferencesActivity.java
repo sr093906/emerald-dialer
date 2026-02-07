@@ -8,6 +8,7 @@ import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 public class DialerPreferencesActivity extends Activity {
 	
@@ -48,6 +49,11 @@ public class DialerPreferencesActivity extends Activity {
 	@Override
 	protected void onResume() {
 		super.onResume();
+		try {
+			fragment.getView().setFitsSystemWindows(true);
+		} catch (NullPointerException e) {
+			Log.e(DialerApp.LOG_TAG, e.toString());
+		}
 		preferences.registerOnSharedPreferenceChangeListener(fragment);
 	}
 	
