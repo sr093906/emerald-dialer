@@ -17,6 +17,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import ru.henridellal.dialer.util.InsetUtil;
+
 public class SpeedDialActivity extends Activity implements AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener {
 	
 	private static final int PICK_CONTACT_NUMBER = 1;
@@ -30,7 +32,7 @@ public class SpeedDialActivity extends Activity implements AdapterView.OnItemCli
 	protected void onCreate(Bundle bundle) {
 		super.onCreate(bundle);
 		DialerApp.setTheme(this);
-		setContentView(R.layout.activity_speed_dial);
+		InsetUtil.setContentView(this, R.layout.activity_speed_dial);
 		mAdapter = new SpeedDialAdapter(this);
 		list = findViewById(R.id.speed_dial_entries);
 		list.setAdapter(mAdapter);

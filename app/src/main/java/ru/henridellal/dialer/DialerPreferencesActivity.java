@@ -40,7 +40,7 @@ public class DialerPreferencesActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		DialerApp.setTheme(this);
+		DialerApp.setTheme(this, false);
 		fragment = new DialerPreferenceFragment();
 		getFragmentManager().beginTransaction().replace(android.R.id.content, fragment).commit();
 		preferences = PreferenceManager.getDefaultSharedPreferences(this);

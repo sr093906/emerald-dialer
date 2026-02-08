@@ -23,6 +23,7 @@ import android.widget.TextView;
 import ru.henridellal.dialer.dialog.CleanPhoneNumberLogDialog;
 import ru.henridellal.dialer.dialog.UnknownNumberDialog;
 import ru.henridellal.dialer.util.ContactsUtil;
+import ru.henridellal.dialer.util.InsetUtil;
 import ru.henridellal.dialer.util.ThemingUtil;
 
 public class PhoneNumberActivity extends Activity implements LoaderManager.LoaderCallbacks<Cursor>,
@@ -35,7 +36,7 @@ public class PhoneNumberActivity extends Activity implements LoaderManager.Loade
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		DialerApp.setTheme(this);
-		setContentView(R.layout.phone_number_activity);
+		InsetUtil.setContentView(this, R.layout.phone_number_activity);
 		Intent intent = getIntent();
 		number = intent.getStringExtra(IntentExtras.PHONE_NUMBER);
 		logAdapter = new LogEntryAdapter(this, null, null, true);

@@ -23,6 +23,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import ru.henridellal.dialer.preference.ContactSourcesPreference;
+import ru.henridellal.dialer.util.InsetUtil;
 import ru.henridellal.dialer.util.ThemingUtil;
 
 @SuppressLint("CustomSplashScreen")
@@ -37,7 +38,8 @@ public class FirstLaunchActivity extends Activity implements View.OnClickListene
         if (!preferences.getBoolean("privacy_policy", false)) {
             PrivacyPolicyDialog.show(this, preferences.edit());
         }
-        setContentView(R.layout.first_launch);
+        DialerApp.setTheme(this);
+        InsetUtil.setContentView(this, R.layout.first_launch);
         findViewById(R.id.btn_provide_permissions).setOnClickListener(this);
         findViewById(R.id.btn_finish_init).setOnClickListener(this);
         if (PermissionManager.hasRequiredPermissions(this)) {

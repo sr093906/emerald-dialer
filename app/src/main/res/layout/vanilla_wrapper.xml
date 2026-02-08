@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <View
+        android:id="@+id/statusBarInsetView"
+        android:background="@color/green_800"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        />
+
+    <LinearLayout
+        android:id="@+id/wrappedContent"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+
+        android:layout_below="@id/statusBarInsetView"
+        android:layout_above="@+id/bottomInsetView"
+        android:layout_toRightOf="@+id/leftInsetView"
+        android:layout_toLeftOf="@+id/rightInsetView"
+        tools:ignore="Orientation,RtlHardcoded" />
+
+    <View
+        android:id="@id/leftInsetView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/statusBarInsetView"
+        android:layout_above="@id/bottomInsetView"
+        />
+
+    <View
+        android:id="@id/rightInsetView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+
+        android:layout_alignParentEnd="true"
+        android:layout_below="@id/statusBarInsetView"
+        android:layout_above="@id/bottomInsetView"
+        />
+
+    <View
+        android:id="@id/bottomInsetView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        />
+</RelativeLayout>

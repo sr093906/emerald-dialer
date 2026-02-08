@@ -49,6 +49,7 @@ import java.util.regex.Pattern;
 import ru.henridellal.dialer.dialog.DeleteCallLogEntryDialog;
 import ru.henridellal.dialer.util.ContactsUtil;
 import ru.henridellal.dialer.util.DateUtil;
+import ru.henridellal.dialer.util.InsetUtil;
 
 public class DialerActivity extends Activity implements View.OnClickListener, View.OnLongClickListener,
 	LoaderManager.LoaderCallbacks<Cursor>, TextWatcher, AdapterView.OnItemClickListener,
@@ -105,7 +106,8 @@ public class DialerActivity extends Activity implements View.OnClickListener, Vi
 	{
 		super.onCreate(savedInstanceState);
 		DialerApp.setTheme(this);
-		setContentView(R.layout.main);
+		InsetUtil.setContentView(this, R.layout.main);
+
 		preferences = PreferenceManager.getDefaultSharedPreferences(this);
 		if (!preferences.getBoolean("privacy_policy", false)
 				|| (Build.VERSION.SDK_INT > 23

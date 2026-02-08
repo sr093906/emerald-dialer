@@ -4,11 +4,14 @@ import android.app.Activity;
 import android.app.Application;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.os.Build;
 import android.preference.PreferenceManager;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import ru.henridellal.dialer.util.InsetUtil;
 
 public class DialerApp extends Application {
 	
@@ -22,10 +25,17 @@ public class DialerApp extends Application {
 		themes.put("amoled", R.style.AppTheme_Amoled);
 	}
 
-	public static void setTheme(Activity activity) {
+	public static void setTheme(final Activity activity) {
+		setTheme(activity, true);
+	}
+
+	public static void setTheme(final Activity activity, boolean applyVanillaWrapper) {
 		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(activity);
 		String theme = preferences.getString("theme", "light");
 		activity.setTheme(themes.get(theme));
+		if (applyVanillaWrapper && Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM) {
+			InsetUtil.applyVanillaWrapper(activity);
+		}
 	}
 
 	public static Map<Integer, String> numberTypeLabels;

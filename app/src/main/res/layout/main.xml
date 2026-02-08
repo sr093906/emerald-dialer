@@ -4,8 +4,7 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent"
-	android:fitsSystemWindows="true">
-
+	>
 	<ListView
 		android:id="@+id/log_entries_list"
 		android:layout_width="fill_parent"
