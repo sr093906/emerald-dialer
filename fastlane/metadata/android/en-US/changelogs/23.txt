@@ -1,0 +1,15 @@
+New in 1.0.22
+- Simplified Chinese translation update (thanks to sr093906)
+- Multiple bug fixes
+
+New in 1.0.21
+- Initial screen with permission request
+- Add preference to hide SIM labels
+- Other UI changes
+- Russian translation update
+
+New in 1.0.20
+- German translation update (thanks to Ettore Atalan)
+- Show call duration in call log
+- Show SIM card used for call in call log
+- Other UI improvements
