@@ -29,6 +29,7 @@ import android.text.InputType;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.format.DateUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
@@ -417,21 +418,25 @@ public class DialerActivity extends Activity implements View.OnClickListener, Vi
 
 	private void showDeviceId() {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		String deviceId;
-		
-		if (Build.VERSION.SDK_INT < 26) {
-			deviceId = telephonyManager.getDeviceId();
-		} else {
-			switch (telephonyManager.getPhoneType()) {
-			case TelephonyManager.PHONE_TYPE_GSM:
-				deviceId = telephonyManager.getImei();
-				break;
-			case TelephonyManager.PHONE_TYPE_CDMA:
-				deviceId = telephonyManager.getMeid();
-				break;
-			default:
-				deviceId = "null";
+		String deviceId = "";
+
+		try {
+			if (Build.VERSION.SDK_INT < 26) {
+				deviceId = telephonyManager.getDeviceId();
+			} else {
+				switch (telephonyManager.getPhoneType()) {
+					case TelephonyManager.PHONE_TYPE_GSM:
+						deviceId = telephonyManager.getImei();
+						break;
+					case TelephonyManager.PHONE_TYPE_CDMA:
+						deviceId = telephonyManager.getMeid();
+						break;
+					default:
+						deviceId = "null";
+				}
 			}
+		} catch (SecurityException e) {
+			deviceId = getResources().getString(R.string.imei_not_permitted);
 		}
 		builder.setMessage(deviceId);
 		builder.create().show();
@@ -553,7 +558,12 @@ public class DialerActivity extends Activity implements View.OnClickListener, Vi
 			showDeviceId();
 		} else if (number.startsWith("*#*#") && number.endsWith("#*#*")) {
 			String secretCode = new StringBuilder(number).substring(4, number.length()-4);
-			sendBroadcast(new Intent("android.provider.Telephony.SECRET_CODE", Uri.parse("android_secret_code://" + secretCode)));
+			try {
+				sendBroadcast(new Intent("android.provider.Telephony.SECRET_CODE", Uri.parse("android_secret_code://" + secretCode)));
+			} catch (SecurityException e) {
+				Log.e(DialerApp.LOG_TAG, e.toString());
+				Toast.makeText(this, e.toString(), Toast.LENGTH_LONG).show();
+			}
 		} else {
 			findViewById(R.id.btn_add_contact).setVisibility(View.VISIBLE);
 			findViewById(R.id.btn_open_contacts).setVisibility(View.INVISIBLE);

@@ -119,4 +119,7 @@
 	<string name="btn_provide_permissions">Provide permissions</string>
     <string name="btn_finish_init">Continue</string>
 
+	<!-- MISC -->
+	<string name="imei_not_permitted">IMEI/MEID is not available for third-party apps.</string>
+
 </resources>
