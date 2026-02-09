@@ -36,7 +36,7 @@ public class ContactsUtil {
 	public static void view(Context context, Uri contentUri, String contactId) {
 		Intent intent = new Intent(Intent.ACTION_VIEW);
 		Uri uri = Uri.withAppendedPath(contentUri, contactId);
-		intent.setDataAndType(uri, "vnd.android.cursor.dir/contact");
+		intent.setDataAndType(uri, "vnd.android.cursor.item/contact");
 		try {
 			context.startActivity(intent);
 		} catch (ActivityNotFoundException e) {
